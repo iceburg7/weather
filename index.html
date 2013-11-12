@@ -49,12 +49,18 @@
 											
 											var feeling = 0
 											var weather = 0
+											
+											var currentdate = new Date();
+											console.log(currentdate.getHours());
+											
 											if(response.current_observation.precip_1hr_in !== "0.00") {
 												weather = 1;
 											}else if(response.current_observation.weather === "Overcast") {
 												weather = 2;
-											}else {
+											}else if(currentdate.getHours() < 6 || currentdate.getHours > 18) {
 												weather = 3;
+											}else{
+												weather = 4;
 											};
 											
 											$(".good").click(function(){
@@ -79,7 +85,9 @@
 												}else if(weather === 2) {
 													$(".overcast").removeClass("hide");
 												}else if(weather === 3) {
-													$(".sunmoon").removeClass("hide");
+													$(".sun").removeClass("hide");
+												}else if(weather === 4) {
+													$(".moon").removeClass("hide");
 												};
 												
 												
@@ -91,7 +99,7 @@
 												$(".bad").addClass("hide");
 												$(".good").addClass("hide");
 												
-												if(feeling === weather) {
+												if(feeling === weather || feeling*2 === weather) {
 													$(".ask").addClass("hide");
 													$(".yes").removeClass("hide");
 													$(".equals").removeClass("hide");
@@ -107,7 +115,9 @@
 												}else if(weather === 2) {
 													$(".overcast").removeClass("hide");
 												}else if(weather === 3) {
-													$(".sunmoon").removeClass("hide");
+													$(".sun").removeClass("hide");
+												}else if(weather === 4) {
+													$(".moon").removeClass("hide");
 												};
 												
 												
@@ -135,12 +145,16 @@
 												}else if(weather === 2) {
 													$(".overcast").removeClass("hide");
 												}else if(weather === 3) {
-													$(".sunmoon").removeClass("hide");
+													$(".sun").removeClass("hide");
+												}else if(weather === 4) {
+													$(".moon").removeClass("hide");
 												};
 												
 												
 											});
 											
+											//var currentdate = new Date();
+											//console.log(currentdate.getHours());
 											//precip_1hr_in
 											
                                   }
