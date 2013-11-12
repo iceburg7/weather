@@ -47,8 +47,101 @@
                                             //    var whenTempWasTaken = parseInt(currentEpoch/1000) - parseInt(response.current_observation.observation_epoch);
                                             //    console.log("Temperature reading is " + whenTempWasTaken + " seconds old.");
 											
+											var feeling = 0
+											var weather = 0
+											if(response.current_observation.precip_1hr_in !== "0.00") {
+												weather = 1;
+											}else if(response.current_observation.weather === "Overcast") {
+												weather = 2;
+											}else {
+												weather = 3;
+											};
 											
+											$(".good").click(function(){
+												feeling = 3;
+												
+												$(".bad").addClass("hide");
+												$(".meh").addClass("hide");
+												
+												if(feeling === weather) {
+													$(".ask").addClass("hide");
+													$(".yes").removeClass("hide");
+													$(".equals").removeClass("hide");
+												}else{
+													$(".ask").addClass("hide");
+													$(".no").removeClass("hide");
+													$(".notEquals").removeClass("hide");
+												};
+												
+												
+												if(weather === 1) {
+													$(".rain").removeClass("hide");
+												}else if(weather === 2) {
+													$(".overcast").removeClass("hide");
+												}else if(weather === 3) {
+													$(".sunmoon").removeClass("hide");
+												};
+												
+												
+											});
 											
+											$(".meh").click(function(){
+												feeling = 2;
+												
+												$(".bad").addClass("hide");
+												$(".good").addClass("hide");
+												
+												if(feeling === weather) {
+													$(".ask").addClass("hide");
+													$(".yes").removeClass("hide");
+													$(".equals").removeClass("hide");
+												}else{
+													$(".ask").addClass("hide");
+													$(".no").removeClass("hide");
+													$(".notEquals").removeClass("hide");
+												};
+												
+												
+												if(weather === 1) {
+													$(".rain").removeClass("hide");
+												}else if(weather === 2) {
+													$(".overcast").removeClass("hide");
+												}else if(weather === 3) {
+													$(".sunmoon").removeClass("hide");
+												};
+												
+												
+											});
+											
+											$(".bad").click(function(){
+												feeling = 1;
+												
+												$(".good").addClass("hide");
+												$(".meh").addClass("hide");
+												
+												if(feeling === weather) {
+													$(".ask").addClass("hide");
+													$(".yes").removeClass("hide");
+													$(".equals").removeClass("hide");
+												}else{
+													$(".ask").addClass("hide");
+													$(".no").removeClass("hide");
+													$(".notEquals").removeClass("hide");
+												};
+												
+												
+												if(weather === 1) {
+													$(".rain").removeClass("hide");
+												}else if(weather === 2) {
+													$(".overcast").removeClass("hide");
+												}else if(weather === 3) {
+													$(".sunmoon").removeClass("hide");
+												};
+												
+												
+											});
+											
+											//precip_1hr_in
 											
                                   }
                                 });
@@ -128,6 +221,26 @@
 					background-repeat:no-repeat;
 				}
 				
+				.equals {
+					width:200px;
+					height:200px;
+					float:left;
+					text-align:center;
+					font-size:1.2em;
+					background-image:url(images/equals.png);
+					background-repeat:no-repeat;
+				}
+				
+				.notEquals {
+					width:200px;
+					height:200px;
+					float:left;
+					text-align:center;
+					font-size:1.2em;
+					background-image:url(images/notequals.png);
+					background-repeat:no-repeat;
+				}
+				
 				.sun {
 					width:200px;
 					height:200px;
@@ -145,6 +258,16 @@
 					text-align:center;
 					font-size:1.2em;
 					background-image:url(images/moon.png);
+					background-repeat:no-repeat;
+				}
+				
+				.sunmoon {
+					width:200px;
+					height:200px;
+					float:left;
+					text-align:center;
+					font-size:1.2em;
+					background-image:url(images/sunmoon.png);
 					background-repeat:no-repeat;
 				}
 				
@@ -219,6 +342,9 @@
 							</div>
 							
 							<div class="moon hide">
+							</div>
+							
+							<div class="sunmoon hide">
 							</div>
 							
 							<div class="overcast hide">
